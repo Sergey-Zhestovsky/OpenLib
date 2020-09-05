@@ -1,6 +1,13 @@
 {
   "port": 3001,
   "mongodb": {
-
+    "name": "OpenLib",
+    "url": "mongodb://localhost/OpenLib",
+    "options": {
+      "useNewUrlParser": true,
+      "useCreateIndex": true,
+      "useFindAndModify": false,
+      "useUnifiedTopology": true
+    }
   }
 }
