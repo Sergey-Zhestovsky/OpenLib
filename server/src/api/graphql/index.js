@@ -1,25 +1,14 @@
-const { gql } = require('apollo-server');
+const author = require('./models/author');
+const genre = require('./models/genre');
+const merge = require('lodash/merge');
 
 module.exports = {
-  typeDefs: gql`
-  type Message {
-    message: String!
-  }
-
-  input HelloInput {
-    message: String!
-  }
-
-  type Query {
-    hello(input: HelloInput): Message!
-  }
-  `,
-  resolvers: {
-    Query: {
-      hello: (_, args, ctx, info) => ({ message: `${args.input.message} world` })
-    }
-  },
-  context: {
-
-  }
+  typeDefs: [
+    author.typeDefs,
+    genre.typeDefs
+  ].join(' '),
+  resolvers: merge({},
+    author.resolvers,
+    genre.resolvers
+  )
 }

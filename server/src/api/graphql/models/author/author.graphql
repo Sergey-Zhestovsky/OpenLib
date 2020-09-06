@@ -1,0 +1,38 @@
+type Author {
+  id: ID!
+  name: String!
+  description: String!
+  topGenres: [Genre]!
+}
+
+input GetAuthorInput {
+  id: ID!
+}
+
+input AddAuthorInput {
+  name: String!
+  description: String!
+  topGenres: [ID]
+}
+
+input EditAuthorInput {
+  id: ID!
+  name: String!
+  description: String!
+  topGenres: [ID]!
+}
+
+input EditAuthorsGenresInput {
+  id: ID!
+  topGenres: [ID]!
+}
+
+type Query {
+  getAuthor(input: GetAuthorInput!): Author!
+}
+
+type Mutation {
+  addAuthor(input: AddAuthorInput!): Author!
+  editAuthor(input: EditAuthorInput!): Author!
+  editAuthorsGenres(input: EditAuthorsGenresInput!): Author!
+}

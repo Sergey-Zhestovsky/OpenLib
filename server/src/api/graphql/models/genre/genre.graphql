@@ -1,0 +1,20 @@
+type Genre {
+  id: ID!
+  name: String!
+}
+
+input GetGenreInput {
+  id: ID!
+}
+
+input AddGenreInput {
+  name: String!
+}
+
+extend type Query {
+  getGenre(input: GetGenreInput!): Genre!
+}
+
+extend type Mutation {
+  addGenre(input: AddGenreInput!): Genre!
+}
