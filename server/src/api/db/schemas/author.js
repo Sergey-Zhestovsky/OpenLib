@@ -12,9 +12,10 @@ const authorSchema = new Schema({
     required: true
   },
   topGenres: {
-    type: ObjectId,
+    type: [ObjectId],
     ref: genreName,
-    required: true
+    required: true,
+    default: []
   }
 }, { timestamps: true });
 

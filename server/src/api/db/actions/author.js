@@ -26,9 +26,11 @@ async function getPublicById(id) {
 
 async function add(data) {
   try {
+    console.log(data)
     const author = new Author(data);
     return await author.save();
   } catch (error) {
+    console.log(error)
     throw ServerError.customError("add_author", error);
   }
 }
