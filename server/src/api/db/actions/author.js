@@ -1,5 +1,5 @@
 const { Types } = require('mongoose');
-const { mongoose } = require('../');
+const mongoose = require('../mongoose');
 const { ServerError, serverErrors } = require('../../utils/ServerError');
 
 const ObjectId = Types.ObjectId;
