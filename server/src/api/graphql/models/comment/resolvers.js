@@ -1,3 +1,5 @@
+const { authorized } = require('../../utils/middleware');
+
 const getComment = (_, { input }, ctx) => {
   return ctx.db.comment.getById(input.id);
 };
@@ -24,15 +26,13 @@ module.exports = {
     getComments
   },
   Mutation: {
-    addComment,
-    toggleCommentRate,
-    removeComment
+    addComment: authorized(addComment),
+    toggleCommentRate: authorized(toggleCommentRate),
+    removeComment: authorized(removeComment),
   },
   Comment: {
-    rated(comment, _, ctx) {
-      if (!ctx.user.isAuthorized)
-        return false;
-
+    rated: (comment, _, ctx) => {
+      if (!ctx.user.isAuthorized) return false;
       return ctx.db.comment.isRatedByUser(comment.id, ctx.user.id);
     },
     rating(comment, _, ctx) {

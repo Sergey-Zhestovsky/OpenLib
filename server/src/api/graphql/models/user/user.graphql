@@ -7,22 +7,23 @@ input GetUserInput {
   id: ID!
 }
 
-input VerifyUserInput {
+input AuthorizeUserInput {
   email: String!
   password: String!
 }
 
-input AddUserInput {
+input SignUpUserInput {
   name: String!
   email: String!
   password: String!
 }
 
 extend type Query {
+  getMe: User!
   getUser(input: GetUserInput!): User!
-  verifyUser(input: VerifyUserInput!): User!
+  authorizeUser(input: AuthorizeUserInput!): User!
 }
 
 extend type Mutation {
-  addUser(input: AddUserInput!): User!
+  signUpUser(input: SignUpUserInput!): User!
 }

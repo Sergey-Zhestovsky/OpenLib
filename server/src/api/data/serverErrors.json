@@ -14,5 +14,9 @@
   "USER__BED_TOKEN": {
     "code": "004",
     "name": "Incorrect session token"
+  },
+  "USER__NOT_AUTHORIZED": {
+    "code": "005",
+    "name": "User unauthorized"
   }
 }

@@ -48,7 +48,7 @@ class User {
 
     await this.session.create(dbUser.id);
     this.synchronize();
-    return this;
+    return dbUser;
   }
 
   async registrate(email, password, { name }) {
@@ -65,7 +65,7 @@ class User {
 
     await this.session.create(dbUser.id);
     this.synchronize();
-    return this;
+    return dbUser;
   }
 
   async exit() {

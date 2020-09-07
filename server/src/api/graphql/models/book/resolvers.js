@@ -1,3 +1,5 @@
+const { authorized } = require('../../utils/middleware');
+
 const getBook = (_, { input }, ctx) => {
   return ctx.db.book.getById(input.id);
 };
@@ -23,6 +25,7 @@ const toggleBookRate = (_, { input }, ctx) => {
   return ctx.db.book.toggleRate(input.id, ctx.user.id);
 };
 
+
 module.exports = {
   Query: {
     getBook,
@@ -31,7 +34,7 @@ module.exports = {
   Mutation: {
     addBook,
     editBook,
-    toggleBookRate
+    toggleBookRate: authorized(toggleBookRate)
   },
   Book: {
     author(book, _, ctx) {
@@ -40,7 +43,7 @@ module.exports = {
     genre(book, _, ctx) {
       return ctx.db.genre.getById(book.genre);
     },
-    rated(book, _, ctx) {
+    rated: (book, _, ctx) => {
       if (!ctx.user.isAuthorized)
         return false;
 
