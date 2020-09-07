@@ -1,0 +1,29 @@
+type User {
+  id: ID!
+  name: String!
+  email: String
+}
+
+input GetUserInput {
+  id: ID!
+}
+
+input VerifyUserInput {
+  email: String!
+  password: String!
+}
+
+input AddUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+extend type Query {
+  getUser(input: GetUserInput!): User!
+  verifyUser(input: VerifyUserInput!): User!
+}
+
+extend type Mutation {
+  addUser(input: AddUserInput!): User!
+}
