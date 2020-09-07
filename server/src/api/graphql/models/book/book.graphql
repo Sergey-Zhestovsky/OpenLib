@@ -1,0 +1,75 @@
+enum SortField {
+  pages
+  ratingCounter
+  date
+}
+
+enum FilterField {
+  author
+  genre
+}
+
+type Book {
+  id: ID!
+  name: String!
+  pages: Int!
+  description: String!
+  author: Author!
+  genre: Genre!
+  rated: Boolean!
+  rating: [User]!
+  ratingCounter: Int!
+  date: String!
+}
+
+input GetBookInput {
+  id: ID!
+}
+
+input FilterInput {
+  filterField: FilterField!
+  filterValue: ID!
+}
+
+input SortInput {
+  sortField: SortField! = date
+  sortValue: Int! = -1
+}
+
+input GetBooksInput {
+  limit: Int
+  filter: FilterInput
+  sort: SortInput! = {}
+}
+
+input AddBookInput {
+  name: String
+  pages: Int
+  description: String
+  author: ID
+  genre: ID
+}
+
+input EditBookInput {
+  id: ID!
+  name: String
+  pages: Int
+  description: String
+  author: ID
+  genre: ID
+}
+
+input RateBookInput {
+  id: ID!
+}
+
+extend type Query {
+  getBook(input: GetBookInput!): Book!
+  getBooks(input: GetBooksInput!): [Book]!
+}
+
+extend type Mutation {
+  addBook(input: AddBookInput!): Book!
+  editBook(input: EditBookInput!): Book!
+  toggleBookRate(input: RateBookInput!): Book!
+}
