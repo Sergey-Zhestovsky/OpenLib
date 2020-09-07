@@ -9,5 +9,29 @@
       "useFindAndModify": false,
       "useUnifiedTopology": true
     }
+  },
+  "session": {
+    "expires_time": 315360000000,
+    "session_name": "SID",
+    "token_name": "session_token",
+    "secret": "vPAYV-m9ok1-mwMWh-0Esnb-J1j9x-YzHAq",
+    "storage": {
+      "url": "mongodb://localhost/OpenLib-session",
+      "options": {
+        "useNewUrlParser": true,
+        "useCreateIndex": true,
+        "useFindAndModify": false,
+        "useUnifiedTopology": true
+      }
+    },
+    "identification": {
+      "expires_time": 315360000000,
+      "session_name": "session_token"
+    }
+  },
+  "authorization": {
+    "crypto_algorithm": "sha256",
+    "crypto_display": "hex",
+    "salt_length": 10
   }
 }

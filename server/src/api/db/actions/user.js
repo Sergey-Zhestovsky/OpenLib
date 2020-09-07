@@ -5,6 +5,14 @@ const { ServerError, serverErrors } = require('../../utils/ServerError');
 const ObjectId = Types.ObjectId;
 const { User } = mongoose.models;
 
+async function isExists(email) {
+  try {
+    return await User.findOne({ email }).exec();
+  } catch (error) {
+    throw ServerError.customError("isExists_user", error);
+  }
+}
+
 async function getById(id) {
   try {
     return await User.findById(id)
@@ -48,8 +56,8 @@ async function verify(email, password) {
 }
 
 module.exports = {
+  isExists,
   getById,
   getList,
-  add,
-  verify
+  add
 };
