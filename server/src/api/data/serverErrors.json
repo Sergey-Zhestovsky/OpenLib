@@ -1,3 +1,10 @@
 {
-  
+  "USER_VERIFICATION__WRONG_DATA": {
+    "code": "001",
+    "name": "Wrong email or password"
+  },
+  "RATING_INCREMENT__ALREADY_INCREMENTED": {
+    "code": "005",
+    "name": "Subject already rated by user"
+  }
 }

@@ -29,14 +29,16 @@ const bookSchema = new Schema({
   },
   rating: {
     type: [ObjectId],
-    ref: userName,
     required: true,
     default: []
   },
-}, { timestamps: true });
+}, { timestamps: { createdAt: 'date' } });
 
 bookSchema.virtual('id')
-  .get(function () { return this._id; })
+  .get(function () { return this._id; });
+
+bookSchema.virtual('ratingCounter')
+  .get(function () { return this.rating.length; });
 
 module.exports = {
   name: "Book",

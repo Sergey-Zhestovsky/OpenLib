@@ -17,9 +17,9 @@ input AddAuthorInput {
 
 input EditAuthorInput {
   id: ID!
-  name: String!
-  description: String!
-  topGenres: [ID]!
+  name: String
+  description: String
+  topGenres: [ID]
 }
 
 input EditAuthorsGenresInput {

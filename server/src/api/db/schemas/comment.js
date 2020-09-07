@@ -37,7 +37,10 @@ const commentSchema = new Schema({
 }, { timestamps: true });
 
 commentSchema.virtual('id')
-  .get(function () { return this._id; })
+  .get(function () { return this._id; });
+
+commentSchema.virtual('ratingCounter')
+  .get(function () { return this.rating.length; });
 
 module.exports = {
   name: "Comment",

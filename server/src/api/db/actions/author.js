@@ -26,18 +26,16 @@ async function getPublicById(id) {
 
 async function add(data) {
   try {
-    console.log(data)
     const author = new Author(data);
     return await author.save();
   } catch (error) {
-    console.log(error)
     throw ServerError.customError("add_author", error);
   }
 }
 
 async function edit(id, data) {
   try {
-    return await Author.findByIdAndUpdate(id, data);
+    return await Author.findByIdAndUpdate(id, data, { new: true });
   } catch (error) {
     throw ServerError.customError("edit_author", error);
   }
@@ -45,7 +43,7 @@ async function edit(id, data) {
 
 async function editGenres(id, genres) {
   try {
-    return await Author.findByIdAndUpdate(id, { topGenres: genres });
+    return await Author.findByIdAndUpdate(id, { topGenres: genres }, { new: true });
   } catch (error) {
     throw ServerError.customError("editGenres_author", error);
   }
