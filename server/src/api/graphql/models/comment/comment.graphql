@@ -1,0 +1,49 @@
+enum CommentSubject {
+  book
+  author
+}
+
+type Comment {
+  id: ID!
+  title: String!
+  message: String!
+  user: ID!
+  rated: Boolean!
+  rating: [User]!
+  ratingCounter: Int!
+}
+
+input GetCommentInput {
+  id: ID!
+}
+
+input GetCommentsInput {
+  subjectType: CommentSubject!
+  subjectId: ID!
+}
+
+input AddCommentInput {
+  title: String!
+  message: String!
+  subjectType: CommentSubject!
+  subjectId: ID!
+}
+
+input RateCommentInput {
+  id: ID!
+}
+
+input RemoveCommentInput {
+  id: ID!
+}
+
+extend type Query {
+  getComment(input: GetCommentInput!): Comment!
+  getComments(input: GetCommentsInput!): [Comment]!
+}
+
+extend type Mutation {
+  addComment(input: AddCommentInput!): Comment!
+  toggleCommentRate(input: RateCommentInput!): Comment!
+  removeComment(input: RemoveCommentInput!): ID!
+}
