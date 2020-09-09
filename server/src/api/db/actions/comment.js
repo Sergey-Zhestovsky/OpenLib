@@ -1,5 +1,5 @@
 const { Types } = require('mongoose');
-const mongoose = require('../mongoose');
+const mongoose = require('../mongoose').mongoose;;
 const { ServerError, serverErrors } = require('../../utils/ServerError');
 
 const ObjectId = Types.ObjectId;
@@ -23,6 +23,16 @@ async function getList(subjectType, subjectId) {
       .exec();
   } catch (error) {
     throw ServerError.customError("getList_comment", error);
+  }
+}
+
+async function getUserComments(userId, limit = 0) {
+  try {
+    return await Comment.find({ user: userId })
+      .limit(limit)
+      .exec();
+  } catch (error) {
+    throw ServerError.customError("getUserComments_comment", error);
   }
 }
 
@@ -85,6 +95,7 @@ async function toggleRate(id, userId) {
 module.exports = {
   getById,
   getList,
+  getUserComments,
   add,
   remove,
   getUserRate,

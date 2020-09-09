@@ -1,5 +1,5 @@
 const { Types } = require('mongoose');
-const mongoose = require('../mongoose');
+const mongoose = require('../mongoose').mongoose;;
 const { ServerError, serverErrors } = require('../../utils/ServerError');
 
 const ObjectId = Types.ObjectId;
@@ -14,14 +14,68 @@ async function getById(id) {
   }
 }
 
-async function getList(limit, filterField, filterValue, sortField, sortValue) {
+async function getAuthorBooks(authorId) {
   try {
-    return await Book.find({ [filterField]: filterValue })
+    return await Book.find({ author: authorId })
+      .exec();
+  } catch (error) {
+    throw ServerError.customError("getAuthorsBooks_book", error);
+  }
+}
+
+async function getList({ limit = 0, offset = 0, authorIds = [], genreIds = [],
+  sortField = "date", sortValue = -1, search = "" } = {}) {
+  try {
+    let books = Book.find();
+
+    if (authorIds.length)
+      books = books.find({ author: { $in: authorIds } });
+
+    if (genreIds.length)
+      books = books.find({ genre: { $in: genreIds } });
+
+    if (search.length)
+      books = books.find({
+        $or: [
+          { name: { $regex: search, $options: "i" } },
+          { description: { $regex: search, $options: "i" } },
+        ]
+      });
+
+    return await books
       .sort({ [sortField]: sortValue })
+      .skip(offset)
       .limit(limit)
       .exec();
   } catch (error) {
     throw ServerError.customError("getList_book", error);
+  }
+}
+
+async function findSimilar(id, limit = 1, userId) {
+  try {
+    const book = await getById(id);
+    return await Book.aggregate([{
+      $match: {
+        genre: book.genre,
+        _id: { $not: { $eq: book.id } },
+        rating: { $not: { $eq: ObjectId(userId) } }
+      }
+    }, {
+      $sample: { size: limit }
+    }]);
+  } catch (error) {
+    throw ServerError.customError("add_book", error);
+  }
+}
+
+async function getUserRatedBooks(userId, limit = 0) {
+  try {
+    return await Book.find({ rating: userId })
+      .limit(limit)
+      .exec();
+  } catch (error) {
+    throw ServerError.customError("getUserRatedBooks_book", error);
   }
 }
 
@@ -80,7 +134,10 @@ async function toggleRate(id, userId) {
 
 module.exports = {
   getById,
+  getAuthorBooks,
   getList,
+  findSimilar,
+  getUserRatedBooks,
   add,
   edit,
   getUserRate,

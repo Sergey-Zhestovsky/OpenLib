@@ -1,5 +1,5 @@
 const { Types } = require('mongoose');
-const mongoose = require('../mongoose');
+const mongoose = require('../mongoose').mongoose;
 const { ServerError, serverErrors } = require('../../utils/ServerError');
 
 const ObjectId = Types.ObjectId;
@@ -14,13 +14,28 @@ async function getById(id) {
   }
 }
 
-async function getPublicById(id) {
+async function getByIds(ids) {
   try {
-    return await Author.findById(id)
-      .populate()
+    return await Author.find({ _id: { $in: ids } })
       .exec();
   } catch (error) {
-    throw ServerError.customError("getPublicById_author", error);
+    throw ServerError.customError("getByIds_author", error);
+  }
+}
+
+async function getList(limit = 0, offset = 0, search = "") {
+  try {
+    return await Author.find({
+      $or: [
+        { name: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+      ]
+    })
+      .skip(offset)
+      .limit(limit)
+      .exec();
+  } catch (error) {
+    throw ServerError.customError("getList_author", error);
   }
 }
 
@@ -51,7 +66,8 @@ async function editGenres(id, genres) {
 
 module.exports = {
   getById,
-  getPublicById,
+  getByIds,
+  getList,
   add,
   edit,
   editGenres

@@ -1,12 +1,14 @@
-const mongoose = require('./mongoose');
-const { mongodb } = require('../../_config');
-const connectionFn = require("./connection");
+const { dbInterface } = require('./mongoose');
 const actions = require("./actions/root");
 
-const connection = connectionFn(mongoose, mongodb.url, mongodb.options);
+dbInterface.connect();
 
 module.exports = {
-  mongoose,
-  connection,
-  actions
+  MongoInterface: require('./MongoInterface'),
+  connections: {
+    "OpenLibDB": {
+      dbInterface,
+      actions
+    }
+  }
 };

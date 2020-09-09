@@ -20,7 +20,7 @@ const authorSchema = new Schema({
 }, { timestamps: true });
 
 authorSchema.virtual('id')
-  .get(function () { return this._id; })
+  .get(function () { return this._id; });
 
 module.exports = {
   name: "Author",
