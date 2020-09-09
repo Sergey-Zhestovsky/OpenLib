@@ -1,9 +1,18 @@
-**/node_modules/
+node_modules
+*.pnp
+*.pnp.js
+
+client/public/icon/*.*
+!client/public/icon/favicon.ico
+!client/public/icon/logo192.png
+
+*/build
 
 *.snap
-
 *nodemon.json
 jest.config.js
 
 *.log
 *.error
+
+npm-debug.log*

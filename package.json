@@ -1,0 +1,19 @@
+{
+  "name": "open-lib-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client",
+    "test": "npm run test --prefix server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
