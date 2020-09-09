@@ -33,5 +33,16 @@
     "crypto_algorithm": "sha256",
     "crypto_display": "hex",
     "salt_length": 10
+  },
+  "test": {
+    "db": {
+      "url": "mongodb://localhost/OpenLib",
+      "options": {
+        "useNewUrlParser": true,
+        "useCreateIndex": true,
+        "useFindAndModify": false,
+        "useUnifiedTopology": true
+      }
+    }
   }
 }
