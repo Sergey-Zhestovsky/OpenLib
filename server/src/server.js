@@ -4,8 +4,8 @@ const cookieParser = require('cookie-parser');
 const { ApolloServer } = require('apollo-server-express');
 const config = require('./_config');
 const { User, session: { SessionManager, sessionStorage } } = require('./api/auth/');
-const { typeDefs, resolvers } = require('./api/graphql');
-const { actions } = require('./api/db');
+const { typeDefs, resolvers, loaders, schemaDirectives } = require('./api/graphql');
+const { connections } = require('./api/db');
 
 const { session: sessionConf } = config;
 const sessionManager = new SessionManager({
@@ -28,14 +28,15 @@ app.use(cookieParser());
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  schemaDirectives,
   async context({ req, res }) {
     const user = new User({
       session: await sessionManager.createSession(req, res)
     });
     return {
       user,
-      db: actions,
-      //loaders: loaders api
+      db: connections.OpenLibDB.actions,
+      loaders: loaders(connections.OpenLibDB.actions)
     };
   },
   playground: {

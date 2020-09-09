@@ -1,4 +1,4 @@
 module.exports = {
   resolvers: require('./resolvers'),
-  typeDefs: require('../../utils/gqlLoader')("comment/comment.graphql")
+  typeDefs: require('../../utils/gqlLoader')(__dirname, 'comment.graphql')
 };

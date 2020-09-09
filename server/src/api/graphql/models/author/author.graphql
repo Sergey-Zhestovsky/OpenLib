@@ -1,12 +1,27 @@
+input AuthoBooksInput {
+  limit: Int = 0
+  page: Int = 0
+  genres: [ID] = []
+  sort: SortBooksInput = {} # ref to book.graphql
+}
+
 type Author {
   id: ID!
   name: String!
   description: String!
+  books(input: AuthoBooksInput = {}): [Book]!
+  bookCounter: Int!
   topGenres: [Genre]!
 }
 
 input GetAuthorInput {
   id: ID!
+}
+
+input GetAuthorsInput {
+  limit: Int = 0
+  page: Int = 1
+  search: String
 }
 
 input AddAuthorInput {
@@ -19,20 +34,21 @@ input EditAuthorInput {
   id: ID!
   name: String
   description: String
-  topGenres: [ID]
+  topGenres: [ID] = []
 }
 
-input EditAuthorsGenresInput {
+input EditAuthorGenresInput {
   id: ID!
   topGenres: [ID]!
 }
 
 type Query {
   getAuthor(input: GetAuthorInput!): Author!
+  getAuthors(input: GetAuthorsInput = {}): [Author]!
 }
 
 type Mutation {
   addAuthor(input: AddAuthorInput!): Author!
   editAuthor(input: EditAuthorInput!): Author!
-  editAuthorsGenres(input: EditAuthorsGenresInput!): Author!
+  editAuthorGenres(input: EditAuthorGenresInput!): Author!
 }

@@ -7,6 +7,14 @@ input GetUserInput {
   id: ID!
 }
 
+input GetUserCommentsInput {
+  limit: Int = 0
+}
+
+input GetUserRatedBooksInput {
+  limit: Int = 0
+}
+
 input AuthorizeUserInput {
   email: String!
   password: String!
@@ -19,11 +27,13 @@ input SignUpUserInput {
 }
 
 extend type Query {
-  getMe: User!
+  getMe: User! @authorized
   getUser(input: GetUserInput!): User!
-  authorizeUser(input: AuthorizeUserInput!): User!
+  ownComments(input: GetUserCommentsInput!): [Comment]! @authorized
+  ownRatedBooks(input: GetUserRatedBooksInput!): [Book]! @authorized
 }
 
 extend type Mutation {
+  loginUser(input: AuthorizeUserInput!): User!
   signUpUser(input: SignUpUserInput!): User!
 }

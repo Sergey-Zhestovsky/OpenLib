@@ -1,7 +1,16 @@
+const { Query: { getBooks } } = require('../book/resolvers');
+
 const getAuthor = (_, { input }, ctx) => {
-  return ctx.db.author
-    .getById(input.id);
+  return ctx.loaders.author
+    .load(input.id);
 };
+
+const getAuthors = (_, { input }, ctx) => {
+  const offset = input.page * input.limit;
+  return ctx.db.author
+    .getList(input.limit, offset, input.search);
+};
+
 
 const addAuthor = (_, { input }, ctx) => {
   return ctx.db.author
@@ -9,30 +18,38 @@ const addAuthor = (_, { input }, ctx) => {
 };
 
 const editAuthor = (_, { input }, ctx) => {
-  const { id, data } = input;
+  const { id, ...data } = input;
   return ctx.db.author
     .edit(id, data);
 };
 
-const editAuthorsGenres = (_, { input }, ctx) => {
-  const { id, data } = input;
+const editAuthorGenres = (_, { input }, ctx) => {
+  const { id, topGenres } = input;
   return ctx.db.author
-    .editGenres(id, data);
+    .editGenres(id, topGenres);
 };
 
 module.exports = {
   Query: {
-    getAuthor
+    getAuthor,
+    getAuthors
   },
   Mutation: {
     addAuthor,
     editAuthor,
-    editAuthorsGenres
+    editAuthorGenres
   },
   Author: {
-    topGenres(project, _, ctx) {
+    books(author, { input }, ctx, info) {
+      input.authors = [author.id];
+      return getBooks(author, { input }, ctx, info);
+    },
+    async bookCounter(author, _, ctx) {
+      return (await ctx.loaders.authorBooks.load(author.id)).length;
+    },
+    topGenres(author, _, ctx) {
       return ctx.db.genre
-        .getGenresByIds(project.topGenres);
+        .getGenresByIds(author.topGenres);
     }
   }
 }

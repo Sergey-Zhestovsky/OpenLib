@@ -1,14 +1,20 @@
-const { authorized } = require('../../utils/middleware');
-
 const getMe = (_, __, ctx) => {
-  return ctx.db.user.geyById(ctx.user.id);
+  return ctx.db.user.getById(ctx.user.id);
 };
 
 const getUser = (_, { input }, ctx) => {
-  return ctx.db.user.geyById(input.id);
+  return ctx.db.user.getById(input.id);
 };
 
-const authorizeUser = (_, { input }, ctx) => {
+const ownComments = (_, { input }, ctx) => {
+  return ctx.db.comment.getUserComments(ctx.user.id, input.limit);
+};
+
+const ownRatedBooks = (_, { input }, ctx) => {
+  return ctx.db.book.getUserRatedBooks(ctx.user.id, input.limit);
+};
+
+const loginUser = (_, { input }, ctx) => {
   return ctx.user.authorize(input.email, input.password);
 };
 
@@ -18,11 +24,13 @@ const signUpUser = (_, { input }, ctx) => {
 
 module.exports = {
   Query: {
-    getMe: authorized(getMe),
+    getMe,
     getUser,
-    authorizeUser
+    ownComments,
+    ownRatedBooks
   },
   Mutation: {
+    loginUser,
     signUpUser
   }
 };

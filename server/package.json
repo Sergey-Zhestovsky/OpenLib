@@ -5,15 +5,26 @@
   "main": "src/server.js",
   "scripts": {
     "start": "nodemon server/src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "set NODE_ENV=testing && jest tests --runInBand"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.17.0",
+    "apollo-server-express": "^2.17.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dataloader": "^2.0.0",
+    "express": "^4.17.1",
     "graphql": "^15.3.0",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
-    "mongoose": "^5.10.3"
+    "mongoose": "^5.10.3",
+    "uid-safe": "^2.1.5"
+  },
+  "devDependencies": {
+    "apollo-server-testing": "^2.17.0",
+    "jest": "^26.4.2"
   }
 }

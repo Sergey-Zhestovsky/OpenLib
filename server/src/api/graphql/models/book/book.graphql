@@ -1,12 +1,7 @@
-enum SortField {
+enum SortBookdField {
   pages
   ratingCounter
   date
-}
-
-enum FilterField {
-  author
-  genre
 }
 
 type Book {
@@ -26,20 +21,23 @@ input GetBookInput {
   id: ID!
 }
 
-input FilterInput {
-  filterField: FilterField!
-  filterValue: ID!
-}
-
-input SortInput {
-  sortField: SortField! = date
+input SortBooksInput {
+  sortField: SortBookdField! = date
   sortValue: Int! = -1
 }
 
 input GetBooksInput {
-  limit: Int
-  filter: FilterInput
-  sort: SortInput! = {}
+  limit: Int = 0
+  page: Int = 0
+  authors: [ID] = []
+  genres: [ID] = []
+  sort: SortBooksInput = {}
+  search: String = ""
+}
+
+input GetBookSimilarInput {
+  id: ID!
+  limit: Int = 1
 }
 
 input AddBookInput {
@@ -66,10 +64,11 @@ input RateBookInput {
 extend type Query {
   getBook(input: GetBookInput!): Book!
   getBooks(input: GetBooksInput!): [Book]!
+  getSimilar(input: GetBookSimilarInput): [Book]!
 }
 
 extend type Mutation {
   addBook(input: AddBookInput!): Book!
   editBook(input: EditBookInput!): Book!
-  toggleBookRate(input: RateBookInput!): Book!
+  toggleBookRate(input: RateBookInput!): Book! @authorized
 }

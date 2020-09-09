@@ -1,15 +1,24 @@
-const { authorized } = require('../../utils/middleware');
-
 const getBook = (_, { input }, ctx) => {
   return ctx.db.book.getById(input.id);
 };
 
 const getBooks = (_, { input }, ctx) => {
-  const filterField = input.filter && input.filter.filterField;
-  const filterValue = input.filter && input.filter.filterValue;
+  const {
+    limit, page, authors, genres, sort: { sortField, sortValue }, search } = input;
 
-  return ctx.db.book.getList(input.limit, filterField,
-    filterValue, input.sort.sortField, input.sort.sortValue);
+  return ctx.db.book.getList({
+    limit,
+    offset: page * limit,
+    authorIds: authors,
+    genreIds: genres,
+    sortField,
+    sortValue,
+    search
+  });
+};
+
+const getSimilar = (_, { input }, ctx) => {
+  return ctx.db.book.add(input.id, input.limit, ctx.user.id);
 };
 
 const addBook = (_, { input }, ctx) => {
@@ -29,16 +38,17 @@ const toggleBookRate = (_, { input }, ctx) => {
 module.exports = {
   Query: {
     getBook,
-    getBooks
+    getBooks,
+    getSimilar
   },
   Mutation: {
     addBook,
     editBook,
-    toggleBookRate: authorized(toggleBookRate)
+    toggleBookRate: toggleBookRate
   },
   Book: {
     author(book, _, ctx) {
-      return ctx.db.author.getById(book.author);
+      return ctx.loaders.author.load(book.author);
     },
     genre(book, _, ctx) {
       return ctx.db.genre.getById(book.genre);
