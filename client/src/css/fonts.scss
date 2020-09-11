@@ -1,0 +1,81 @@
+$fontName: "TTNorms";
+$folderPath: "/fonts/";
+
+@mixin fontGenerator($weight, $style, $fileName) {
+    font-family: $fontName;
+    font-weight: $weight;
+    font-style: $style;
+    src: url($folderPath + $fileName);
+}
+
+@font-face {
+    @include fontGenerator(100, normal, "TTNorms-Thin.otf");
+}
+
+@font-face {
+    @include fontGenerator(100, italic, "TTNorms-ThinItalic.otf");
+}
+
+@font-face {
+    @include fontGenerator(200, normal, "TTNorms-ExtraLight.otf");
+}
+
+@font-face {
+    @include fontGenerator(200, italic, "TTNorms-ExtraLightItalic.otf");
+}
+
+@font-face {
+    @include fontGenerator(300, normal, "TTNorms-Light.otf");
+}
+
+@font-face {
+    @include fontGenerator(300, italic, "TTNorms-LightItalic.otf");
+}
+
+@font-face {
+    @include fontGenerator(400, normal, "TTNorms-Regular.otf");
+}
+
+@font-face {
+    @include fontGenerator(400, italic, "TTNorms-Italic.otf");
+}
+
+@font-face {
+    @include fontGenerator(500, normal, "TTNorms-Medium.otf");
+}
+
+@font-face {
+    @include fontGenerator(500, italic, "TTNorms-MediumItalic.otf");
+}
+
+@font-face {
+    @include fontGenerator(600, normal, "TTNorms-Bold.otf");
+}
+
+@font-face {
+    @include fontGenerator(600, italic, "TTNorms-BoldItalic.otf");
+}
+
+@font-face {
+    @include fontGenerator(700, normal, "TTNorms-ExtraBold.otf");
+}
+
+@font-face {
+    @include fontGenerator(700, italic, "TTNorms-ExtraBoldItalic.otf");
+}
+
+@font-face {
+    @include fontGenerator(800, normal, "TTNorms-Black.otf");
+}
+
+@font-face {
+    @include fontGenerator(800, italic, "TTNorms-BlackItalic.otf");
+}
+
+@font-face {
+    @include fontGenerator(900, normal, "TTNorms-Heavy.otf");
+}
+
+@font-face {
+    @include fontGenerator(900, italic, "TTNorms-HeavyItalic.otf");
+}
