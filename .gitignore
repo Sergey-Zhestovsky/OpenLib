@@ -5,6 +5,8 @@ node_modules
 client/public/icon/*.*
 !client/public/icon/favicon.ico
 !client/public/icon/logo192.png
+client/public/avatar/*.*
+!client/public/avatar/avatar.jpg
 
 */build
 

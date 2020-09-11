@@ -1,0 +1,16 @@
+.button {
+    white-space: nowrap;
+    transition: all .125s;
+
+    &.default {
+        padding: 0.3em 1em;
+        border: 2px solid;
+        border-radius: 2em;
+        color: #E9C46A;
+
+        &:hover {
+            color: #FFD500;
+            box-shadow: 0 0 2px #e9c46a80, 0 0 2px #e9c46a75 inset;
+        }
+    }
+}

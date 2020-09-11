@@ -1,0 +1,14 @@
+.list-element {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    padding: 5px 12px;
+    transition: all .125s;
+
+    &.active {
+        color: #E9C46A;
+    }
+}
