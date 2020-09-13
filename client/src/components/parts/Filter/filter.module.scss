@@ -1,0 +1,23 @@
+.filter {
+    background-color: #f5f5f5;
+}
+
+.segment {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+
+    &>* {
+        flex-shrink: 0;
+        margin: 10px 20px;
+    }
+
+    &:first-child {
+        margin-top: unset;
+    }
+}
+
+.select {
+    width: 225px;
+}
