@@ -3,12 +3,23 @@
 }
 
 body {
-  background-color: #264653;
-  color: whitesmoke;
+  background-color: white;
+  color: #242F40;
 
   font: {
     size: 18px;
     family: "TTNorms", Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+}
+
+a,
+button,
+input {
+
+  &:active,
+  &:focus {
+    border: none;
+    outline: none;
   }
 }
 
@@ -27,4 +38,16 @@ button {
   border: none;
   margin: 0;
   padding: 0;
+}
+
+input {
+  width: 100%;
+  border: none;
+}
+
+
+.body-wrapper {
+  margin: 0 auto;
+  max-width: 1225px;
+  padding: 15px 55px;
 }
