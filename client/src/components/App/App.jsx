@@ -1,11 +1,22 @@
 import React from 'react';
-import styles from './App.scss';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import PageFrame from '../parts/PageFrame/PageFrame';
+import Books from '../pages/Books/Books';
+import Home from '../pages/Home/Home';
+
+import styles from './App.module.scss';
 
 function App() {
   return (
-    <div className={styles["App"]}>
-      lets GOOOOOOOOOOO
-    </div>
+    <BrowserRouter>
+      <PageFrame>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/books" component={Books} />
+        </Switch>
+      </PageFrame>
+    </BrowserRouter>
   );
 }
 

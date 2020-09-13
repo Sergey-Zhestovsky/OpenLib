@@ -1,0 +1,25 @@
+.list-element {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    padding: 5px 12px;
+    transition: all .125s;
+
+    &.active {
+        position: relative;
+        color: #CCA43B;
+
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -12px;
+            height: 2px;
+            width: 100%;
+            background: #CCA43B;
+        }
+    }
+}
