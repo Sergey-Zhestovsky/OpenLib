@@ -1,16 +1,44 @@
 .button {
     white-space: nowrap;
+    padding: 0.5em 1.25em;
+    border-radius: 2em;
     transition: all .125s;
 
     &.default {
-        padding: 0.3em 1em;
         border: 2px solid;
-        border-radius: 2em;
         color: #E9C46A;
 
         &:hover {
             color: #FFD500;
             box-shadow: 0 0 2px #e9c46a80, 0 0 2px #e9c46a75 inset;
+        }
+    }
+
+    &.cancel {
+        border: 2px solid #D9D9D9;
+
+        &:hover {
+            background-color: #F4A261;
+            border-color: #F4A261;
+            color: white;
+            box-shadow: 3px 2px 12px #f4a26159;
+        }
+
+        &:active {
+            box-shadow: 0px 0px 6px #f4a2612e;
+        }
+    }
+
+    &.submit {
+        background: #2A9D8F;
+        color: white;
+
+        &:hover {
+            box-shadow: 3px 2px 12px #2a9d8f59;
+        }
+
+        &:active {
+            box-shadow: 0px 0px 6px #2a9d8f2e;
         }
     }
 }

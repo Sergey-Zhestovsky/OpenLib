@@ -4,15 +4,18 @@ import classNames from 'classnames';
 import styles from './button.module.scss';
 
 export const buttonStyles = {
-  default: styles["default"]
+  default: styles["default"],
+  cancel: styles["cancel"],
+  submit: styles["submit"],
 };
 
 export default function Button(props) {
   const {
-    style,
+    style = buttonStyles.default,
     className,
     disabledClass,
     children,
+    type = "button",
     ...rest
   } = props;
 
