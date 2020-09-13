@@ -1,0 +1,110 @@
+$prefix: "select__";
+
+.selector {
+  & .#{$prefix}control {
+    border: none;
+    background-color: #a8dadc;
+    border-radius: 2em;
+    overflow: hidden;
+    transition: all .125s;
+
+    &.#{$prefix}control--is-focused {
+      border: none;
+      box-shadow: none;
+    }
+
+    &.#{$prefix}control--menu-is-open {
+      z-index: 40;
+      box-shadow: 0 0 10px #a8dadc9c;
+
+      & .#{$prefix}dropdown-indicator {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  & .#{$prefix}value-container {
+    cursor: text;
+    padding: 2px 16px;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  & .#{$prefix}placeholder {
+    color: #546A7B;
+  }
+
+  & .#{$prefix}input {
+    color: #242f40;
+
+    & input::placeholder {
+      color: #546A7B;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  & .#{$prefix}indicator-separator {
+    display: none;
+  }
+
+  & .#{$prefix}indicator {
+    cursor: pointer;
+    color: #242f40;
+
+    &:hover {
+      color: #242f40;
+    }
+  }
+
+  & .#{$prefix}dropdown-indicator {
+    background-color: #a8dadc;
+    box-shadow: 0 0 12px 0 #0000001a;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: -1px;
+    transition: all 0.125s;
+
+    &:hover {
+      background-color: #8aced0;
+    }
+  }
+
+  & .#{$prefix}menu {
+    margin: 0 1em;
+    width: calc(100% - 2em);
+    padding-top: 0.25em;
+    box-shadow: 0 0 12px 0 #a8dadc30;
+    background: #f0f9f9;
+    border-radius: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    z-index: 39;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      box-shadow: 0 0 4px #0000009c;
+    }
+  }
+
+  & .#{$prefix}option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &.#{$prefix}option:active,
+    &.#{$prefix}option--is-focused {
+      background-color: #e2f3f3;
+    }
+
+    &.#{$prefix}option--is-selected {
+      color: inherit;
+      background-color: #c5e7e8;
+    }
+  }
+}
