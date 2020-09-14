@@ -1,0 +1,44 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #242F40;
+  user-select: none;
+}
+
+.page-button {
+  margin: 0 10px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: all .125s;
+
+  &.active {
+    background: #242F40;
+    color: white;
+  }
+
+  &.disabled {
+    color: #D9D9D9;
+  }
+
+  &.clickable {
+    cursor: pointer;
+
+    &:hover {
+      background: #E5E5E5;
+    }
+  }
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  line-height: 1;
+}
